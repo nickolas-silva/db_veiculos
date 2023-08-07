@@ -3,6 +3,7 @@ package entity;
 public class User {
   private String nome;
   private Integer idade;
+  private String senha;
 
   public User(String nome, Integer idade) {
     this.nome = nome;
@@ -13,6 +14,14 @@ public class User {
     this.nome = "";
     this.idade = 0;
 
+  }
+
+  public String getSenha() {
+    return senha;
+  }
+
+  public void setSenha(String senha) {
+    this.senha = senha;
   }
 
   public String getNome() {

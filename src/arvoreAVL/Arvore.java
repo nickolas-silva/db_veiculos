@@ -1,7 +1,5 @@
 package arvoreAVL;
 
-import entity.Veiculo;
-
 public class Arvore<T>  {
   No<T> raiz;
 
@@ -143,5 +141,20 @@ public class Arvore<T>  {
   /*
    * Implementar a remoção de acordo com o código da prática 4
    */
+
+  //  void remover(Integer ch, No esq){
+  //   raiz = remover(raiz, ch, esq);
+  //  }
+
+  //  No remover(No arv, Integer ch, T v){
+  //   if(arv == null){
+  //     return arv;
+  //   }
+  //   if(ch < arv.chave){
+  //     arv.esq = remover(ch, arv.esq);
+  //   } else if(ch > arv.chave){
+  //     arv.dir = remover(arv.dir, ch);
+  //   }
+  //  }
   
 }

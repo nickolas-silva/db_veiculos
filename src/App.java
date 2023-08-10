@@ -1,82 +1,85 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-import entity.Servidor;
-import entity.User;
+import entity.Cliente;
+import entity.Protocolo;
 import entity.Veiculo;
 
 public class App {
-    static Scanner cin = new Scanner(System.in);
+    static Scanner input = new Scanner(System.in);
     public static void main(String[] args) throws InterruptedException, IOException{
         //INSERIR VEÍCULOS
-        Servidor servidor = new Servidor();
+
+        Protocolo p = new Protocolo();
+        p.inserirVeiculosPadrao();
         
-        Veiculo teste = new Veiculo("ABC-1234", "123456789", "João", "12345678910", "Fiat", "01/01/2000");
-        // Veiculo teste2 = new Veiculo("ABC-1234", "123456789", "João", "12345678910", "Fiat", "01/01/2000");
-        
-        for(int i = 1; i <= 50; i++){
-            servidor.addVeiculo(i, teste);
-        }
-        
-        
-        //servidor.exibirVeiculos(); EXIBE TODOS OS VEICULOS DO SERVIDOR
 
         //LOGIN DE USUÁRIO
         System.out.println("======================================");
-        User user = new User();
 
         System.out.println("Entre com o nome do usuário: ");
-        String nome = cin.nextLine();
-        user.setNome(nome);
-
+        String nome = input.nextLine();
+        
         System.out.println("Entre com a senha do usuário: ");
-        String senha = cin.nextLine();
-        user.setSenha(senha);
+        String senha = input.nextLine();
+
+        Cliente user = new Cliente(nome, senha);
 
         new ProcessBuilder("clear").inheritIO().start().waitFor();
 
 
         //MENU DE OPÇÕES   
         int opcao = 0;
-        while(opcao != 5){
+        while(opcao != 6){
+            System.out.println("Usuário: " + user.getNome());
+            System.out.println("MENU DO SISTEMA");
             System.out.println("======================================");
             System.out.println("1 - Inserir veículo");
             System.out.println("2 - Exibir veículos");
             System.out.println("3 - Editar Veículo");
             System.out.println("4 - Remover Veículo");
-            System.out.println("5 - Sair");
+            System.out.println("5 - Buscar Veículo");
+            System.out.println("6 - Sair");
             System.out.println("======================================");
             System.out.println("Entre com a opção desejada: ");
-            opcao = cin.nextInt();
-            cin.nextLine();
+            opcao = input.nextInt();
+            input.nextLine();
             switch(opcao){
                 case 1:
                     System.out.println("Entre com a placa do veículo: ");
-                    String placa = cin.nextLine();
+                    String placa = input.nextLine();
                     System.out.println("Entre com o renavam do veículo: ");
-                    String renavam = cin.nextLine();
+                    String renavam = input.nextLine();
                     System.out.println("Entre com o nome do condutor do veículo: ");
-                    String nome_condutor = cin.nextLine();
+                    String nome_condutor = input.nextLine();
                     System.out.println("Entre com o cpf do condutor do veículo: ");
-                    String cpf_condutor = cin.nextLine();
+                    String cpf_condutor = input.nextLine();
                     System.out.println("Entre com o modelo do veículo: ");
-                    String modelo = cin.nextLine();
+                    String modelo = input.nextLine();
                     System.out.println("Entre com a data de fabricação do veículo: ");
-                    String data_fabri = cin.nextLine();
-                    Veiculo veiculo = new Veiculo(placa, renavam, nome_condutor, cpf_condutor, modelo, data_fabri);
-                    servidor.addVeiculo(1, veiculo);
+                    Integer ano_fabri = input.nextInt();
+                    Veiculo veiculo = new Veiculo(placa, modelo, ano_fabri, cpf_condutor, nome_condutor, renavam);
+                    p.inserirVeiculo(1, veiculo);
                     break;
                 case 2:
-                    servidor.exibirVeiculos();
+                    p.listar();
+                    break;
+                case 3:
+                    p.editarVeiculo();
+                    break;
+                case 4:
+                    p.deletarVeiculo();
                     break;
                 case 5:
+                    p.buscarVeiculo();
+                    break;
+                case 6:
                     System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
                     break;
             }
-            //new ProcessBuilder("clear").inheritIO().start().waitFor();
         }
 
 

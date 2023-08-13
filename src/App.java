@@ -49,7 +49,7 @@ public class App {
                     System.out.println("Entre com a placa do veículo: ");
                     String placa = input.nextLine();
                     System.out.println("Entre com o renavam do veículo: ");
-                    String renavam = input.nextLine();
+                    Long renavam = input.nextLong();
                     System.out.println("Entre com o nome do condutor do veículo: ");
                     String nome_condutor = input.nextLine();
                     System.out.println("Entre com o cpf do condutor do veículo: ");
@@ -58,8 +58,8 @@ public class App {
                     String modelo = input.nextLine();
                     System.out.println("Entre com a data de fabricação do veículo: ");
                     Integer ano_fabri = input.nextInt();
-                    Veiculo veiculo = new Veiculo(placa, modelo, ano_fabri, cpf_condutor, nome_condutor, renavam);
-                    p.inserirVeiculo(1, veiculo);
+                    Veiculo veiculo = new Veiculo(placa, modelo, ano_fabri, cpf_condutor, nome_condutor, renavam.toString());
+                    p.inserirVeiculo(renavam, veiculo);
                     break;
                 case 2:
                     p.listar();

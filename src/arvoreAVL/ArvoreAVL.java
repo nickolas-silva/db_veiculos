@@ -1,0 +1,224 @@
+package arvoreAVL;
+
+import entity.Veiculo;
+
+public class ArvoreAVL {
+	
+	No raiz;
+
+	public ArvoreAVL() {
+		this.setRaiz(null);
+	}
+	
+	public No getRaiz() {
+		return raiz;
+	}
+
+	public void setRaiz(No raiz) {
+		this.raiz = raiz;
+	}
+	
+	public void ordem() {
+		this.ordem(getRaiz());
+	}
+	
+	private void ordem(No a){
+		
+		if(a != null) {
+			this.ordem(a.getEsq());
+			System.out.println(a.getChave() + ": " + a.getValor());
+			this.ordem(a.getDir());
+		}
+
+	}
+	
+	// pegar altura de um nó avl
+	
+	private Integer altura(No a) {
+		
+		if(a == null)
+			return -1;
+		
+		return a.getAlturaNo();
+
+	}
+	
+	private Integer maior(Integer a, Integer b) {
+		
+		return (a > b) ? a : b;
+
+	}
+	
+	private Integer obterFB(No a) {
+		
+		if(a == null)
+			return 0;
+
+		return this.altura(a.getEsq()) - this.altura(a.getDir());
+	}
+	
+	public void inserir(String k, Veiculo v) {
+		this.raiz = this.inserir(getRaiz(), k, v);
+	}
+	
+	private No inserir(No a, String k, Veiculo v) {
+		
+		if(a == null)
+			return new No(k, v);
+
+		if(k.compareTo(a.chave) < 0)
+			a.esq = this.inserir(a.esq, k, v);
+		
+		else if(k.compareTo(a.chave) > 0)
+			a.dir = this.inserir(a.dir, k, v);
+		
+		else
+			return a;
+		
+		/*2. Atualiza altura do ancestral do nó inserido */
+		
+		a.alturaNo = 1 + 
+				this.maior(this.altura(a.getEsq()), this.altura(a.getDir()));
+		
+		/*3. Obter FB */
+		
+		int fb = this.obterFB(a);
+		int fbEsq = this.obterFB(a.getEsq());
+		int fbDir = this.obterFB(a.getDir());
+		
+		
+		if(fb > 1 && fbEsq >= 0)
+			
+			return this.rds(a);
+		
+		if(fb > 1 && fbEsq < 0) {
+			
+			 a.esq = this.res(a.esq);
+			 return rds(a);
+		}	 
+			
+		if(fb < -1 && fbDir <= 0)
+			
+			return this.res(a);
+		
+		if(fb < -1 && fbDir > 0) {
+			
+			a.dir = this.rds(a.dir);
+			return res(a);
+		}	
+		
+		return a;
+	}
+	
+	private No res(No x) {
+		
+		No y = x.getDir();
+		No z = y.getEsq();
+		
+		// executa rotação
+		
+		y.setEsq(x);
+		x.setDir(z);
+		
+		x.alturaNo = 1 + this.maior(altura(x.getEsq()), altura(x.getDir()));
+		y.alturaNo = 1 + this.maior(altura(y.getEsq()), altura(y.getDir()));
+
+		return y;
+	}
+	
+	private No rds(No y) {
+		
+		No x = y.getEsq();
+		No z = x.getDir();
+		
+		// executa rotação
+		
+		x.setDir(y);
+		y.setEsq(z);;
+		
+		y.alturaNo = 1 + this.maior(altura(y.getEsq()), altura(y.getDir()));
+		x.alturaNo = 1 + this.maior(altura(x.getEsq()), altura(x.getDir()));
+		
+		return x;
+	}
+
+	/*
+	 * Implementar a remoção de acordo com o código da prática 4
+	 */
+
+	No menorChave(No arv){
+		No temp = arv;
+		if(temp == null){
+			return null;
+		}
+		while(temp.esq != null){
+			temp = temp.esq;
+			
+		}
+		return temp;
+	}
+
+	public void remover(String ch, Veiculo v){
+		raiz = remover(raiz, ch, v);
+	}
+	No remover(No arv, String ch, Veiculo v){
+		if(arv == null){
+			return arv;
+		}
+		if(ch.compareTo(arv.chave) < 0){
+			arv.esq = remover(arv.esq, ch, v);
+		}
+		else if(ch.compareTo(arv.chave) > 0){
+			arv.dir = remover(arv.dir, ch, v);
+		}
+		if(arv.esq == null && arv.dir == null){
+			arv = null;
+		}
+		else if(arv.esq == null){
+			No temp = arv;
+			arv = temp.dir;
+			temp = null;
+		}
+		else if(arv.dir == null){
+			No temp = arv;
+			arv = temp.esq;
+			temp = null;
+		}
+		else{
+			No temp = menorChave(arv.dir);
+			arv.chave = temp.chave;
+			arv.dir = remover(arv.dir, temp.chave, v);
+		}
+
+		if(arv == null){
+			return arv;
+		}
+
+		arv.alturaNo = 1 + maior(altura(arv.esq), altura(arv.dir));
+		int fb = obterFB(arv);
+		int fbEsq = obterFB(arv.esq);
+		int fbDir = obterFB(arv.dir);
+
+		if(fb > 1 && fbEsq >= 0){
+			return rds(arv);
+		}
+		if(fb > 1 && fbEsq < 0){
+			arv.esq = res(arv.esq);
+			return rds(arv);
+		}
+		if(fb < -1 && fbDir <= 0){
+			return res(arv);
+		}
+
+		if(fb < -1 && fbDir > 0){
+			arv.dir = rds(arv.dir);
+			return res(arv);
+		}
+		return arv;
+
+	}
+
+
+	 
+	
+}

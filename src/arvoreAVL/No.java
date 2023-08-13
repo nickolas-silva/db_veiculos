@@ -1,69 +1,62 @@
 package arvoreAVL;
 
-public class No<T> implements Comparable<Integer> {
-  Integer chave;
-  T valor;
-  Integer alturaNo;
-  No<T> esq, dir;
+import entity.Veiculo;
 
-  public No(Integer k, T v) {
+public class No {
 
-    this.setChave(k);
-    this.setValor(v);
-    this.setAlturaNo(0);
-    this.setEsq(null);
-    this.setDir(null);
+	String chave;
+	Veiculo valor;
+	Integer alturaNo;
+	No esq, dir;
+	
+	public No(String k, Veiculo v) {
+		
+		this.setChave(k);
+		this.setValor(v);
+		this.setAlturaNo(0);
+		this.setEsq(null);
+		this.setDir(null);
+		
+	}
+	
+	public String getChave() {
+		return chave;
+	}
 
-  }
+	public void setChave(String chave) {
+		this.chave = chave;
+	}
 
-  public int getAlturaNo() {
-    return alturaNo;
-  }
+	public Veiculo getValor() {
+		return valor;
+	}
 
-  public void setAlturaNo(int alturaNo) {
-    this.alturaNo = alturaNo;
-  }
+	public void setValor(Veiculo valor) {
+		this.valor = valor;
+	}
 
-  public Integer getChave() {
-    return chave;
-  }
+	public Integer getAlturaNo() {
+		return alturaNo;
+	}
 
-  public void setChave(Integer chave) {
-    this.chave = chave;
-  }
+	public void setAlturaNo(Integer alturaNo) {
+		this.alturaNo = alturaNo;
+	}
 
-  public T getValor() {
-    return valor;
-  }
+	public No getEsq() {
+		return esq;
+	}
 
-  public void setValor(T valor) {
-    this.valor = valor;
-  }
+	public void setEsq(No esq) {
+		this.esq = esq;
+	}
 
-  public No<T> getEsq() {
-    return esq;
-  }
+	public No getDir() {
+		return dir;
+	}
 
-  public void setEsq(No<T> esq) {
-    this.esq = esq;
-  }
+	public void setDir(No dir) {
+		this.dir = dir;
+	}
 
-  public No<T> getDir() {
-    return dir;
-  }
-
-  public void setDir(No<T> dir) {
-    this.dir = dir;
-  }
-
-  @Override
-  public int compareTo(Integer o) {
-
-    if (this.getChave() < o)
-      return -1;
-    if (this.getChave() > o)
-      return 1;
-
-    return 0;
-  }
 }

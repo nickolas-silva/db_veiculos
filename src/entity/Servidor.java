@@ -1,10 +1,11 @@
 package entity;
 
-import arvoreAVL.Arvore;
+
+import arvoreAVL.ArvoreAVL;
 
 public class Servidor {
   
-  public Arvore<Veiculo> dadosV = new Arvore<>();
+  public ArvoreAVL dadosV = new ArvoreAVL();
   
   public Servidor(){
     System.out.println("Servidor Inicializado!");
@@ -12,11 +13,15 @@ public class Servidor {
     
   }
 
-  public void addVeiculo(Integer k,Veiculo v){
+  public void addVeiculo(String k,Veiculo v){
     dadosV.inserir(k, v);
   }
 
   public void exibirVeiculos(){
     dadosV.ordem();
+  }
+
+  public void removerVeiculo(String k, Veiculo v){
+    dadosV.remover(k, v);
   }
 }

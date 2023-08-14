@@ -5,6 +5,7 @@ import entity.Veiculo;
 public class ArvoreAVL {
 	
 	No raiz;
+
 	public ArvoreAVL() {
 		this.setRaiz(null);
 	}
@@ -58,6 +59,7 @@ public class ArvoreAVL {
 	
 	public void inserir(Veiculo v) {
 		this.raiz = this.inserir(getRaiz(), v);
+		
 	}
 	
 	private No inserir(No a, Veiculo v) {
@@ -120,7 +122,6 @@ public class ArvoreAVL {
 		
 		x.alturaNo = 1 + this.maior(altura(x.getEsq()), altura(x.getDir()));
 		y.alturaNo = 1 + this.maior(altura(y.getEsq()), altura(y.getDir()));
-
 		return y;
 	}
 	
@@ -135,8 +136,7 @@ public class ArvoreAVL {
 		y.setEsq(z);;
 		
 		y.alturaNo = 1 + this.maior(altura(y.getEsq()), altura(y.getDir()));
-		x.alturaNo = 1 + this.maior(altura(x.getEsq()), altura(x.getDir()));
-		
+		x.alturaNo = 1 + this.maior(altura(x.getEsq()), altura(x.getDir()));	
 		return x;
 	}
 
@@ -155,6 +155,7 @@ public class ArvoreAVL {
 
 	public void remover(long ch){
 		raiz = remover(raiz, ch);
+		
 	}
 	No remover(No arv, long ch){
 		if(arv == null)

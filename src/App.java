@@ -31,6 +31,8 @@ public class App {
         //MENU DE OPÇÕES   
         int opcao = 0;
         while(opcao != 7){
+            System.out.println();
+            System.out.println();
             System.out.println("Usuário: " + user.getNome());
             System.out.println("MENU DO SISTEMA");
             System.out.println("======================================");

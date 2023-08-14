@@ -5,7 +5,6 @@ import entity.Veiculo;
 public class ArvoreAVL {
 	
 	No raiz;
-
 	public ArvoreAVL() {
 		this.setRaiz(null);
 	}
@@ -57,20 +56,20 @@ public class ArvoreAVL {
 		return this.altura(a.getEsq()) - this.altura(a.getDir());
 	}
 	
-	public void inserir(String k, Veiculo v) {
-		this.raiz = this.inserir(getRaiz(), k, v);
+	public void inserir(Veiculo v) {
+		this.raiz = this.inserir(getRaiz(), v);
 	}
 	
-	private No inserir(No a, String k, Veiculo v) {
+	private No inserir(No a, Veiculo v) {
 		
 		if(a == null)
-			return new No(k, v);
+			return new No(v);
 
-		if(k.compareTo(a.chave) < 0)
-			a.esq = this.inserir(a.esq, k, v);
+		if(v.renavam < a.chave)
+			a.esq = this.inserir(a.esq, v);
 		
-		else if(k.compareTo(a.chave) > 0)
-			a.dir = this.inserir(a.dir, k, v);
+		else if(v.renavam > a.chave)
+			a.dir = this.inserir(a.dir, v);
 		
 		else
 			return a;
@@ -106,7 +105,6 @@ public class ArvoreAVL {
 			a.dir = this.rds(a.dir);
 			return res(a);
 		}	
-		
 		return a;
 	}
 	
@@ -142,9 +140,6 @@ public class ArvoreAVL {
 		return x;
 	}
 
-	/*
-	 * Implementar a remoção de acordo com o código da prática 4
-	 */
 
 	No menorChave(No arv){
 		No temp = arv;
@@ -158,36 +153,39 @@ public class ArvoreAVL {
 		return temp;
 	}
 
-	public void remover(String ch, Veiculo v){
-		raiz = remover(raiz, ch, v);
+	public void remover(long ch){
+		raiz = remover(raiz, ch);
 	}
-	No remover(No arv, String ch, Veiculo v){
-		if(arv == null){
+	No remover(No arv, long ch){
+		if(arv == null)
 			return arv;
-		}
-		if(ch.compareTo(arv.chave) < 0){
-			arv.esq = remover(arv.esq, ch, v);
-		}
-		else if(ch.compareTo(arv.chave) > 0){
-			arv.dir = remover(arv.dir, ch, v);
-		}
-		if(arv.esq == null && arv.dir == null){
-			arv = null;
-		}
-		else if(arv.esq == null){
-			No temp = arv;
-			arv = temp.dir;
-			temp = null;
-		}
-		else if(arv.dir == null){
-			No temp = arv;
-			arv = temp.esq;
-			temp = null;
-		}
-		else{
-			No temp = menorChave(arv.dir);
-			arv.chave = temp.chave;
-			arv.dir = remover(arv.dir, temp.chave, v);
+		
+		if(ch < arv.chave)
+			arv.esq = remover(arv.esq, ch);
+		
+		else if(ch > arv.chave)
+			arv.dir = remover(arv.dir, ch);
+		
+		else {
+			if (arv.esq == null && arv.dir == null){
+				arv = null;
+			}
+			else if(arv.esq == null){
+				No temp = arv;
+				arv = temp.dir;
+				temp = null;
+			}
+			else if(arv.dir == null){
+				No temp = arv;
+				arv = temp.esq;
+				temp = null;
+			}
+			else{
+				No temp = menorChave(arv.dir);
+				arv.chave = temp.chave;
+				arv.dir = remover(arv.dir, temp.chave);
+			}
+
 		}
 
 		if(arv == null){
@@ -218,6 +216,32 @@ public class ArvoreAVL {
 
 	}
 
+	public int contNos(){
+		return contNos(raiz);
+	}
+
+	public int contNos(No arv){
+		if(arv == null){
+			return 0;
+		}
+		else{
+			return 1 + contNos(arv.esq) + contNos(arv.dir);
+		}
+	}
+
+	public No buscar(long renavam){
+		return buscar(raiz, renavam);
+	}
+
+	public No buscar(No arv, long k){
+		if(arv == null) return null;
+
+		if(arv.chave > k) return buscar(arv.esq, k);
+
+		if(arv.chave < k) return buscar(arv.dir, k);
+
+		return arv;
+	}
 
 	 
 	

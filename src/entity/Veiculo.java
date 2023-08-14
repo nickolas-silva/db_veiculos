@@ -1,14 +1,14 @@
 package entity;
 
 public class Veiculo {
-  String placa;
-  String renavam;
-  String nome_condutor;
-  String cpf_condutor;
-  String modelo;
-  Integer ano_fabri;
+  public String placa;
+  public long renavam;
+  public String nome_condutor;
+  public String cpf_condutor;
+  public String modelo;
+  public Integer ano_fabri;
 
-  public Veiculo(String placa, String modelo, Integer ano_fabri, String cpf_condutor, String nome_condutor, String renavam) {
+  public Veiculo(String placa, String modelo, Integer ano_fabri, String cpf_condutor, String nome_condutor, long renavam) {
     this.placa = placa;
     this.renavam = renavam;
     this.nome_condutor = nome_condutor;
@@ -25,7 +25,7 @@ public class Veiculo {
 
   public Veiculo(){
     this.placa = "";
-    this.renavam = "";
+    this.renavam = 0;
     this.nome_condutor = "";
     this.cpf_condutor = "";
     this.modelo = "";

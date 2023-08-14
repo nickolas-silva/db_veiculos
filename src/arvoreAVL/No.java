@@ -4,14 +4,14 @@ import entity.Veiculo;
 
 public class No {
 
-	String chave;
-	Veiculo valor;
+	long chave;
+	public Veiculo valor;
 	Integer alturaNo;
 	No esq, dir;
 	
-	public No(String k, Veiculo v) {
+	public No(Veiculo v) {
 		
-		this.setChave(k);
+		this.setChave(v.renavam);
 		this.setValor(v);
 		this.setAlturaNo(0);
 		this.setEsq(null);
@@ -19,11 +19,11 @@ public class No {
 		
 	}
 	
-	public String getChave() {
+	public long getChave() {
 		return chave;
 	}
 
-	public void setChave(String chave) {
+	public void setChave(long chave) {
 		this.chave = chave;
 	}
 

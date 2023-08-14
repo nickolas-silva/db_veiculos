@@ -30,7 +30,7 @@ public class App {
 
         //MENU DE OPÇÕES   
         int opcao = 0;
-        while(opcao != 6){
+        while(opcao != 7){
             System.out.println("Usuário: " + user.getNome());
             System.out.println("MENU DO SISTEMA");
             System.out.println("======================================");
@@ -39,7 +39,8 @@ public class App {
             System.out.println("3 - Editar Veículo");
             System.out.println("4 - Remover Veículo");
             System.out.println("5 - Buscar Veículo");
-            System.out.println("6 - Sair");
+            System.out.println("6 - Quantidade de Veículos");
+            System.out.println("7 - Sair");
             System.out.println("======================================");
             System.out.println("Entre com a opção desejada: ");
             opcao = input.nextInt();
@@ -48,32 +49,69 @@ public class App {
                 case 1:
                     System.out.println("Entre com a placa do veículo: ");
                     String placa = input.nextLine();
-                    System.out.println("Entre com o renavam do veículo: ");
-                    Long renavam = input.nextLong();
+
+                    
                     System.out.println("Entre com o nome do condutor do veículo: ");
                     String nome_condutor = input.nextLine();
+                    
                     System.out.println("Entre com o cpf do condutor do veículo: ");
                     String cpf_condutor = input.nextLine();
+                    
                     System.out.println("Entre com o modelo do veículo: ");
                     String modelo = input.nextLine();
+                    
                     System.out.println("Entre com a data de fabricação do veículo: ");
                     Integer ano_fabri = input.nextInt();
-                    Veiculo veiculo = new Veiculo(placa, modelo, ano_fabri, cpf_condutor, nome_condutor, renavam.toString());
-                    p.inserirVeiculo(renavam, veiculo);
+                    
+                    System.out.println("Entre com o renavam do veículo: ");
+                    long renavam = input.nextLong();
+
+                    Veiculo veiculo = new Veiculo(placa, modelo, ano_fabri, cpf_condutor, nome_condutor, renavam);
+                    p.inserirVeiculo(veiculo);
                     break;
                 case 2:
                     p.listar();
                     break;
                 case 3:
-                    p.editarVeiculo();
+                
+                System.out.println("Entre com a placa do veículo: ");
+                String placa_editar = input.nextLine();
+                
+                    System.out.println("Entre com o nome do condutor do veículo: ");
+                    String nome_condutor_editar = input.nextLine();
+                    
+                    System.out.println("Entre com o cpf do condutor do veículo: ");
+                    String cpf_condutor_editar = input.nextLine();
+                    
+                    System.out.println("Entre com o modelo do veículo: ");
+                    String modelo_editar = input.nextLine();
+                    
+                    System.out.println("Entre com a data de fabricação do veículo: ");
+                    Integer ano_fabri_editar = input.nextInt();
+                    
+                    System.out.println("Entre com o renavam do veiculo que deseja editar: ");
+                    long renavam_editar = input.nextLong();
+
+                    Veiculo veiculo_editar = new Veiculo(placa_editar, modelo_editar, ano_fabri_editar, cpf_condutor_editar, nome_condutor_editar, renavam_editar);
+                    p.editarVeiculo(veiculo_editar.renavam, veiculo_editar);
                     break;
                 case 4:
-                    p.deletarVeiculo();
+                    System.out.println("Entre com o renavam do veículo: ");
+                    long renavam_remover = input.nextLong();
+                    p.deletarVeiculo(renavam_remover);
                     break;
                 case 5:
-                    p.buscarVeiculo();
+                    System.out.println("Entre com o renavam do veículo: ");
+                    long renavam_buscar = input.nextLong();
+                   
+                    p.buscarVeiculo(renavam_buscar);
                     break;
+
                 case 6:
+                    p.qntNos();
+                    break;
+
+                case 7:
                     System.out.println("Saindo...");
                     break;
                 default:
